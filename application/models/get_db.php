@@ -8,11 +8,17 @@ class Get_db extends CI_Model{
         parent::__construct();
     }
 
-    function get_All(){
+    function get_AllUser(){
         $this->load->database();
-        $query = $this->db->query("SELECT * FROM test");
+        $query = $this->db->query("SELECT * FROM users");
         return $query->result();
     }
+	
+	function getUserId($data){
+		$this->load->database();
+        $query = $this->db->query('SELECT * FROM users where username = "'.$data["username"] .'" and passwork = "'.$data["passwork"].'"');
+        return $query->result();
+	}
     
     function insert1($data){
         $this->load->database();

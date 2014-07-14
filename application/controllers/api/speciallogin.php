@@ -19,7 +19,9 @@ require APPPATH.'libraries/REST_Controller.php';
 class Speciallogin extends REST_Controller
 {
 	var $REST_CLIENT_ID = "af1a6dad481fac130b474f6c676fcaa5";
-	var $REST_SERVER_ID = "sf1a6dad481fac130b474f6c676fcaa0";
+	var $ACCESS_TOKEN   = "5271be0ab0054f1b920d96ec41224f096c115d38";
+	var $REFESH_TOKEN    = "cc6e0c939ca3c8ba100362cc2df78c813c0f83b8";
+	var $EXPIRED_IN		= 31536000;
 	function get()
     {
     	// Example data for testing.
@@ -60,9 +62,9 @@ class Speciallogin extends REST_Controller
 				return;
 			}
             if ($device_id) {
-                $widget = array('status' => "success", 'Auth' => array('user'=>$code,'passwork'=>$device_id,'token_request_server'=>$this->REST_SERVER_ID,'time_litmit_request'=>3100000)); // test code
-                //$widget = $this->widgets_model->getWidget($id);
-                $this->response($widget, 200); // 201 being the HTTP response code
+                //$widget = array('status' => "success", 'Auth' => array('user'=>$code,'passwork'=>$device_id,'token_request_server'=>$this->REST_SERVER_ID,'time_litmit_request'=>3100000)); // test code
+                $result = array('result'=>array('success'=>true,'message'=>"Authorized! ",'data'=>array('access_token'=>$this->ACCESS_TOKEN,'refesh_token'=>$this->REFESH_TOKEN,'expired_in'=>$this->EXPIRED_IN)));
+                $this->response($result, 200); // 201 being the HTTP response code
             } else {
                 $this->response(array('error' => 'Widget could not be created'), 404);
             }

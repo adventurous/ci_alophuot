@@ -3,7 +3,8 @@
 <?php
      foreach($results as $row){
          echo $row->id;
-         echo $row->name;
+         echo $row->username;
+		 echo $row->passwork;
          echo "<br />";
      }
  ?>

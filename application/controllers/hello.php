@@ -18,7 +18,9 @@
       
       public function getValues(){
           $this->load->model('get_db');
-          $data["results"] = $this->get_db->get_All();
+          //$data["results"] = $this->get_db->get_AllUser();
+		   $datainfo = array("username" => "admin","passwork"=>"devteam");
+		  $data["results"] = $this->get_db->getUserId($datainfo);
           $this->load->view('view_db',$data);
       }
       
