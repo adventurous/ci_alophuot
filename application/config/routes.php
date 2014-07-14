@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
+$route['api/user'] = 'api/user';
 
 
 /* End of file routes.php */
