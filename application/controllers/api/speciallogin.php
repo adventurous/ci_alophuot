@@ -57,16 +57,19 @@ class Speciallogin extends REST_Controller
 			$device_id = $data['device_id'];
 			$code = $data['code'];
 			$request_client_id = $data['rest_client_id'];
-			if(strcmp($request_client_id,$this->REST_CLIENT_ID)!=0){
-				$this->response(array('status' => "Fail"), $e->getCode());
+			if(strcmp($request_client_id,$this->REST_CLIENT_ID)!=0 || is_null($device_id) || is_null($code)){
+				$this->response(array('result' => array('success'=>false,'message'=>'Wrong post value! code=&device_id=&client_id=')), 200);
 				return;
 			}
-            if ($device_id) {
+			$datainfo = array('username'=>$code,'passwork'=>$device_id);
+			$this->load->model('get_dbuser');
+			$dataget["results"] = $this->get_dbuser->getUserId($datainfo);
+            if (!is_null($dataget["results"])) {
                 //$widget = array('status' => "success", 'Auth' => array('user'=>$code,'passwork'=>$device_id,'token_request_server'=>$this->REST_SERVER_ID,'time_litmit_request'=>3100000)); // test code
                 $result = array('result'=>array('success'=>true,'message'=>"Authorized! ",'data'=>array('access_token'=>$this->ACCESS_TOKEN,'refesh_token'=>$this->REFESH_TOKEN,'expired_in'=>$this->EXPIRED_IN)));
                 $this->response($result, 200); // 201 being the HTTP response code
             } else {
-                $this->response(array('error' => 'Widget could not be created'), 404);
+                $this->response(array('result'=>array('success'=>false,'message'=>"Account isn't exist!")),200);
             }
 		} catch (Exception $e) {
 			// Here the model can throw exceptions like the following:
