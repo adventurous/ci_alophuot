@@ -19,9 +19,11 @@
       public function getValues(){
           $this->load->model('get_dbuser');
           //$data["results"] = $this->get_db->get_AllUser();
-		   $datainfo = array("username" => "admin1","passwork"=>"devteam");     
+		   $datainfo = array("username" => "admin","passwork"=>"devteam");     
 		  $data["results"] = $this->get_dbuser->getUserId($datainfo);
-          if(!is_null($data["results"])){
+		  $aa = 'a';
+         // if(!is_null($data["results"])){
+		 if(!empty($aa)){
 			$this->load->view('view_db',$data);
 		  }else 
 			echo "Account isn't exist";

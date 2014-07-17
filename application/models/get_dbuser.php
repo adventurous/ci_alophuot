@@ -23,9 +23,9 @@ class Get_dbuser extends CI_Model{
 			return null;
 	}
     
-    function insert1($data){
+    function insertUser($data){
         $this->load->database();
-        $this->db->insert("test",$data); 
+        $this->db->insert("users",$data); 
     }
     
     function insert2($data){
