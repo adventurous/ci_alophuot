@@ -66,7 +66,7 @@ class Speciallogin extends REST_Controller
 			$dataget["results"] = $this->get_dbuser->getUserId($datainfo);
             if (!is_null($dataget["results"])) {
                 //$widget = array('status' => "success", 'Auth' => array('user'=>$code,'passwork'=>$device_id,'token_request_server'=>$this->REST_SERVER_ID,'time_litmit_request'=>3100000)); // test code
-                $result = array('result'=>array('success'=>true,'message'=>"Authorized! ",'data'=>array('access_token'=>$this->ACCESS_TOKEN,'refesh_token'=>$this->REFESH_TOKEN,'expired_in'=>$this->EXPIRED_IN)));
+                $result = array('result'=>array('success'=>true,'message'=>"Authorized! ",'data'=>array('access_token'=>$this->ACCESS_TOKEN,'refesh_token'=>$this->REFESH_TOKEN,'expired_in'=>$this->EXPIRED_IN),'info'=>array('Email'=>!empty($dataget['username']),'LoginName'=>!empty($dataget['username']),'Passwork'=>!empty($dataget['password']),'FullName'=>!empty($dataget['fullname']),'Phone'=>!empty($dataget['phone']))));
                 $this->response($result, 200); // 201 being the HTTP response code
             } else {
                 $this->response(array('result'=>array('success'=>false,'message'=>"Account isn't exist!")),200);

@@ -65,7 +65,7 @@ class Register extends REST_Controller
 			$datainfo = array('username'=>$LoginName,'passwork'=>$Password,'typeuser'=>0,'fullname'=>$FullName,'avatar_link'=>$Avatar_link,'phone'=>$Phone,'mail'=>$Email);
 			$this->load->model('get_dbuser');
 			$this->get_dbuser->insertUser($datainfo);
-            $result = array('result'=>array('success'=>true,'info'=>array('Email'=>true,'LoginName'=>true,'Passwork'=>true,'PasswordConfirm'=>true),'user_info'=>array('fullname'=>$FullName,'email'=>$Email,'username'=>$LoginName,'id'=>1),'message'=>"Register"));
+            $result = array('result'=>array('success'=>true,'info'=>array('Email'=>true,'LoginName'=>true,'Passwork'=>true,'FullName'=>false,'Phone'=>false),'user_info'=>array('fullname'=>$FullName,'phone'=>$Phone,'email'=>$Email,'username'=>$LoginName,'id'=>1),'message'=>"Register"));
             $this->response($result, 200); // 201 being the HTTP response code
 		} catch (Exception $e) {
 			// Here the model can throw exceptions like the following:
