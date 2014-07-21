@@ -28,13 +28,8 @@ class Get_dbuser extends CI_Model{
         $this->db->insert("users",$data); 
     }
     
-    function insert2($data){
+    function updateUser($data){
         $this->load->database();
-        $this->db->insert_batch("test",$data); 
-    }
-    
-    function update1($data){
-        $this->load->database();
-        $this->db->update("test",$data,"id = 2"); 
+        $this->db->update("users",$data,'username = "'.$data["username].'"'); 
     }
 }
