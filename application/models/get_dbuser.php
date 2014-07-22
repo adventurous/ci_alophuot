@@ -16,7 +16,7 @@ class Get_dbuser extends CI_Model{
 	
 	function getUserId($data){
 		$this->load->database();
-        $query = $this->db->query('SELECT * FROM users where username = "'.$data["username"] .'" and passwork = "'.$data["passwork"].'"');
+        $query = $this->db->query('SELECT * FROM users where username = "'.$data["username"] .'" and password = "'.$data["password"].'"');
 		if($query->num_rows() >= 1)
 			return $query->result();
 		else 
@@ -30,6 +30,6 @@ class Get_dbuser extends CI_Model{
     
     function updateUser($data){
         $this->load->database();
-        $this->db->update("users",$data,'username = "'.$data["username].'"'); 
+        $this->db->update("users",$data,'username = "'.$data["username"].'"'); 
     }
 }

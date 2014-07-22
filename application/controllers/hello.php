@@ -19,9 +19,11 @@
       public function getValues(){
           $this->load->model('get_dbuser');
           //$data["results"] = $this->get_db->get_AllUser();
-		   $datainfo = array("username" => "admin","passwork"=>"devteam");     
+		   $datainfo = array("username" => "admin","password"=>"devteam");     
 		  $data["results"] = $this->get_dbuser->getUserId($datainfo);
 		  $aa = 'a';
+		  $row = array_values($data["results"]);
+		  echo !empty($row[0]->username);
          // if(!is_null($data["results"])){
 		 if(!empty($aa)){
 			$this->load->view('view_db',$data);

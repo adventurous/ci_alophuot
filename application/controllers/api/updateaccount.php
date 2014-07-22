@@ -51,10 +51,10 @@ class Updateaccount extends REST_Controller
 		$data = $this->_post_args;
 		try {
 			//$id = $this->widgets_model->createWidget($data);
-			$LoginName = $data['LoginName'];
-			$FullName = $data['FullName'];
-			$Phone = $data['Phone'];
-			$valueAvatar = $data['ValueAvatar'];
+			$LoginName = $data['loginname'];
+			$FullName = $data['fullname'];
+			$Phone = $data['phone'];
+			$valueAvatar = $data['valueavatar'];
 			$Avatar_link = "";
 			if(!empty($valueAvatar)){
 				$Avatar_link = $this->_save_image($valueAvatar);
@@ -62,7 +62,7 @@ class Updateaccount extends REST_Controller
 			$datainfo = array('username'=>$LoginName,'fullname'=>$FullName,'avatar_link'=>$Avatar_link,'phone'=>$Phone);
 			$this->load->model('get_dbuser');
 			$this->get_dbuser->updateUser($datainfo);
-            $result = array('result'=>array('success'=>true,'info'=>array('Email'=>true,'LoginName'=>true,'Passwork'=>true,'FullName'=>!empty($FullName),'Phone'=>!empty($Phone)),'user_info'=>array('fullname'=>$FullName,'phone'=>$Phone),'message'=>"Update account
+            $result = array('result'=>array('success'=>true,'message'=>"Update Info!",'info'=>array('FullName'=>!empty($FullName),'Phone'=>!empty($Phone))));
             $this->response($result, 200); // 201 being the HTTP response code
 		} catch (Exception $e) {
 			// Here the model can throw exceptions like the following:

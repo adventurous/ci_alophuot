@@ -61,12 +61,13 @@ class Speciallogin extends REST_Controller
 				$this->response(array('result' => array('success'=>false,'message'=>'Wrong post value! code=&device_id=&client_id=')), 200);
 				return;
 			}
-			$datainfo = array('username'=>$code,'passwork'=>$device_id);
+			$datainfo = array('username'=>$code,'password'=>$device_id);
 			$this->load->model('get_dbuser');
 			$dataget["results"] = $this->get_dbuser->getUserId($datainfo);
             if (!is_null($dataget["results"])) {
                 //$widget = array('status' => "success", 'Auth' => array('user'=>$code,'passwork'=>$device_id,'token_request_server'=>$this->REST_SERVER_ID,'time_litmit_request'=>3100000)); // test code
-                $result = array('result'=>array('success'=>true,'message'=>"Authorized! ",'data'=>array('access_token'=>$this->ACCESS_TOKEN,'refesh_token'=>$this->REFESH_TOKEN,'expired_in'=>$this->EXPIRED_IN),'info'=>array('Email'=>!empty($dataget['username']),'LoginName'=>!empty($dataget['username']),'Passwork'=>!empty($dataget['password']),'FullName'=>!empty($dataget['fullname']),'Phone'=>!empty($dataget['phone']))));
+				$rows = array_values($dataget["results"]);
+                $result = array('result'=>array('success'=>true,'message'=>"Authorized! ",'data'=>array('code'=>$code,'access_token'=>$this->ACCESS_TOKEN,'refesh_token'=>$this->REFESH_TOKEN,'expired_in'=>$this->EXPIRED_IN),'info'=>array('Email'=>!empty($rows[0]->username),'LoginName'=>!empty($rows[0]->username),'Password'=>!empty($rows[0]->password),'FullName'=>!empty($rows[0]->fullname),'Phone'=>!empty($rows[0]->phone))));
                 $this->response($result, 200); // 201 being the HTTP response code
             } else {
                 $this->response(array('result'=>array('success'=>false,'message'=>"Account isn't exist!")),200);

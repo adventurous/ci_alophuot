@@ -4,7 +4,7 @@
      foreach($results as $row){
          echo $row->id;
          echo $row->username;
-		 echo $row->passwork;
+		 echo $row->password;
          echo "<br />";
      }
  ?>
